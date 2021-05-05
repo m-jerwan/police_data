@@ -1,3 +1,53 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+body {
+  background: #323232;
+  font-family: "Roboto", sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+}
+body .container {
+  padding: 10rem;
+}
+body .row {
+  margin-top: calc(((3rem * 0.288) * -1 + 0.25rem));
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
 
+.hexagon {
+  position: relative;
+  width: 3rem;
+  height: 1.731rem;
+  background-color: cyan;
+  margin: 0.864rem 0;
+  margin-right: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: scale(1);
+  transition: all 0.25s ease-in-out;
+}
+.hexagon:hover {
+  transform: scale(0.75);
+}
+.hexagon:before, .hexagon:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  left: 0;
+  border-left: 1.5rem solid transparent;
+  border-right: 1.5rem solid transparent;
+}
+.hexagon:before {
+  bottom: 100%;
+  border-bottom: 0.864rem solid cyan;
+}
+.hexagon:after {
+  top: 100%;
+  width: 0;
+  border-top: 0.864rem solid cyan;
+}
 
 /*# sourceMappingURL=style.css.map */
