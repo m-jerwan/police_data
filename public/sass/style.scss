@@ -43,7 +43,7 @@ $gutter: 0.25rem;
 body {
   background: #323232;
   font-family: "Roboto", sans-serif;
-  font-size: 2rem;
+  font-size: 0.8rem;
   font-weight: bold;
   .container {
     padding: 10rem;
@@ -59,4 +59,8 @@ body {
 
 .hexagon {
   @include hexagon($size, $gutter, cyan);
+}
+
+.land {
+  @include hexagon($size, $gutter, lightgreen);
 }
