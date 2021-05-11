@@ -1,4 +1,4 @@
-const Forces = [
+const ForcesList = [
     {
     "id": "avon-and-somerset",
     "name": "Avon and Somerset Constabulary"
@@ -177,9 +177,9 @@ const Forces = [
     }
     ]
 
-    //module.exports = Forces;
+    module.exports = ForcesList;
 
-    for (const elmt of Forces) {
-        console.log(elmt.name);
-      }
+    // for (const elmt of Forces) {
+    //     console.log(elmt.name);
+    //   }
 //https://www.researchgate.net/figure/A-UK-map-of-missing-people-reports-per-police-force-for-2010-2011-Source-NPIA-2011_fig1_258175660
