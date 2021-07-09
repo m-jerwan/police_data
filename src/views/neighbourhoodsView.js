@@ -3,19 +3,19 @@ const RequestHelper = require('../helpers/request_helper');
 
 const NeighbourhoodsView = function() {
     this.parentHtmlElement = document.querySelector('#neighborhoods');
-    this.parentForce = null;
+    this.force = null;
     this.neighourhoods = [];
 }
 
 NeighbourhoodsView.prototype.bindEvents = function(){
     PubSub.subscribe('ForcesView:force-clicked', (evt) =>{
-        this.parentForce = evt.detail;
+        this.force = evt.detail;
         this.getNeighbourghoods();
     })
 }
 
 NeighbourhoodsView.prototype.getNeighbourghoods = function(){
-    const url = `https://data.police.uk/api/${this.parentForce}/neighbourhoods`;
+    const url = `https://data.police.uk/api/${this.force}/neighbourhoods`;
     const requestHelper = new RequestHelper(url);
     requestHelper.get((data)=>{
         this.neighourhoods = data;
@@ -31,10 +31,15 @@ NeighbourhoodsView.prototype.renderNeighbourhoodList = function(){
         pElement.textContent = hood.name;
         this.parentHtmlElement.appendChild(pElement);
     });
-    this.parentHtmlElement.onchange = (elm)=> PubSub.publish('NeighbourhoodsView:neighborhood-selected', this.parentHtmlElement.value);
+    this.parentHtmlElement.onchange = (elm)=> {
+        PubSub.publish(
+            'NeighbourhoodsView:neighborhood-selected',
+            {
+                force: this.force, 
+                neighbourhood: this.parentHtmlElement.value}
+            )
+};
 }
-
-
 
 NeighbourhoodsView.prototype.prepSelectList = function(){
     this.parentHtmlElement.textContent = null;
