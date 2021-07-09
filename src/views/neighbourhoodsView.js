@@ -24,19 +24,25 @@ NeighbourhoodsView.prototype.getNeighbourghoods = function(){
 }
 
 NeighbourhoodsView.prototype.renderNeighbourhoodList = function(){
-    this.parentHtmlElement.textContent = null;
-    var nullElement = document.createElement('option');
-    nullElement.textContent = '-choose a Neighborhood-';
-    nullElement.selected = true;
-    this.parentHtmlElement.appendChild(nullElement);
-    document.querySelector('#neighborhoods').hidden = false;
+    this.prepSelectList();
     this.neighourhoods.forEach((hood) => {
         const pElement = document.createElement('option');
         pElement.value = hood.id;
         pElement.textContent = hood.name;
         this.parentHtmlElement.appendChild(pElement);
     });
+    this.parentHtmlElement.onchange = (elm)=> PubSub.publish('NeighbourhoodsView:neighborhood-selected', this.parentHtmlElement.value);
 }
 
+
+
+NeighbourhoodsView.prototype.prepSelectList = function(){
+    this.parentHtmlElement.textContent = null;
+    var nullElement = document.createElement('option');
+    nullElement.textContent = '-choose a Neighborhood-';
+    nullElement.selected = true;
+    this.parentHtmlElement.appendChild(nullElement);
+    document.querySelector('#neighborhoods').hidden = false;
+}
 
 module.exports = NeighbourhoodsView;

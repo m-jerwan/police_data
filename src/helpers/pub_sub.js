@@ -3,7 +3,7 @@ const PubSub = {
     const event = new CustomEvent(channel, {
       detail: payload
     });
-    // console.log(payload);
+    // console.dir(payload);
     document.dispatchEvent(event);
   },
   subscribe: function (channel, callback) {
