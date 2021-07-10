@@ -10,6 +10,7 @@ const NeighbourhoodDetailsView = function() {
     this.events = [];
     this.priorities = [];
     this.crimes = [];
+    this.boundaryChar = '';
 }
 
 
@@ -24,6 +25,11 @@ NeighbourhoodDetailsView.prototype.bindEvents = function(){
         this.getHoodPriorities();
         // console.log(this);
     })
+    PubSub.subscribe('ProcessBoundary:boundaryChar-ready', (evt) =>{
+        this.boundaryChar = evt.detail;
+        this.getHoodCrimes();
+    })
+
 }
 // 
 // TODO: DRY all sthis into one function:
@@ -42,7 +48,6 @@ NeighbourhoodDetailsView.prototype.getHoodBoundary = function(){
     const requestHelper = new RequestHelper(url);
     requestHelper.get((data)=>{
         this.boundary = data;
-        this.getHoodCrimes();
         PubSub.publish('neighbourhoodDetailsView:boundary-raw', this.boundary );
     });
 }
@@ -73,12 +78,13 @@ NeighbourhoodDetailsView.prototype.getHoodPriorities = function(){
 
 
 NeighbourhoodDetailsView.prototype.getHoodCrimes = function(){
-    const url = `https://data.police.uk/api/crimes-street/all-crime?poly=`;
+    const url = `https://data.police.uk/api/crimes-street/all-crime?poly=${this.boundaryChar}`;
     const requestHelper = new RequestHelper(url);
-    // console.log(url);
-    // requestHelper.get((data)=>{
-        // this.crimes = data;
-    // });
+    console.log(url);
+    requestHelper.get((data)=>{
+        this.crimes = data;
+        console.log(this.crimes);
+    });
 }
 
 

@@ -19,8 +19,7 @@ ProcessBoundary.prototype.limitBoundary = function() {
     this.boundaryLessCoordiantes = this.pickOutCoordinates(this.boundaryRaw);
     this.boundaryLessPrecise = this.boundaryLessCoordiantes.map(this.lessPrecision);
     this.changeToChar();
-    console.log(this.boundaryChar);
-    PubSub.publish('ProcessBoundary:boundaryChar-ready', his.boundaryChar);
+    PubSub.publish('ProcessBoundary:boundaryChar-ready', this.boundaryChar);
 }
 
 
