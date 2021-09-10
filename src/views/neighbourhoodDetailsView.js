@@ -25,7 +25,7 @@ NeighbourhoodDetailsView.prototype.bindEvents = function(){
         this.getHoodPriorities();
         // console.log(this);
     })
-    PubSub.subscribe('ProcessBoundary:boundaryChar-ready', (evt) =>{
+    PubSub.subscribe('CalcsEngine:boundaryChar-ready', (evt) =>{
         this.boundaryChar = evt.detail;
         this.getHoodCrimes();
     })
@@ -78,9 +78,8 @@ NeighbourhoodDetailsView.prototype.getHoodPriorities = function(){
 
 
 NeighbourhoodDetailsView.prototype.getHoodCrimes = function(){
-    const url = `https://data.police.uk/api/crimes-street/all-crime?poly=${this.boundaryChar}`;
+    const url = `https://data.police.uk/api/crimes-street/all-crime?poly=${this.boundaryChar}&date=2021-01`;
     const requestHelper = new RequestHelper(url);
-    console.log(url);
     requestHelper.get((data)=>{
         this.crimes = data;
         console.log(this.crimes);

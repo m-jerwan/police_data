@@ -1,13 +1,13 @@
 const PubSub = require('../helpers/pub_sub');
 
-const ProcessBoundary = function() {
+const CalcsEngine = function() {
     this.boundaryRaw = [];
     this.boundaryLessCoordiantes = [];
     this.boundaryLessPrecise = [];
     this.boundaryChar = '';
 }
 
-ProcessBoundary.prototype.bindEvents = function() {
+CalcsEngine.prototype.bindEvents = function() {
     PubSub.subscribe('neighbourhoodDetailsView:boundary-raw', (evt) =>{
         this.boundaryRaw = evt.detail;
         this.limitBoundary(this.boundaryRaw);
@@ -15,17 +15,17 @@ ProcessBoundary.prototype.bindEvents = function() {
 }
 
 // parent function for limiting
-ProcessBoundary.prototype.limitBoundary = function() {
+CalcsEngine.prototype.limitBoundary = function() {
     this.boundaryLessCoordiantes = this.pickOutCoordinates(this.boundaryRaw);
     this.boundaryLessPrecise = this.boundaryLessCoordiantes.map(this.lessPrecision);
     this.changeToChar();
-    PubSub.publish('ProcessBoundary:boundaryChar-ready', this.boundaryChar);
+    PubSub.publish('CalcsEngine:boundaryChar-ready', this.boundaryChar);
 }
 
 
 // picks out every Nth coordinate, working recurseveliy until number of coordinates is below limit
 // TODO: change factor
-ProcessBoundary.prototype.pickOutCoordinates = function(boundary){
+CalcsEngine.prototype.pickOutCoordinates = function(boundary){
     var lessCoordiantes = boundary.filter(function(_, i){
         return i%3 === 0;
     });
@@ -36,7 +36,7 @@ ProcessBoundary.prototype.pickOutCoordinates = function(boundary){
 }
 
 // cuts last chars of lang and lat decreasing precision of each coordiate
-ProcessBoundary.prototype.lessPrecision = function(elmnt) {
+CalcsEngine.prototype.lessPrecision = function(elmnt) {
     const indexOfLat = elmnt.latitude.indexOf('.');
     const indexOfLong = elmnt.longitude.indexOf('.');
     return {
@@ -46,14 +46,14 @@ ProcessBoundary.prototype.lessPrecision = function(elmnt) {
 }
 
 // constructs a char string from coordinates
-ProcessBoundary.prototype.changeToChar = function() {
+CalcsEngine.prototype.changeToChar = function() {
     for (coordPair of this.boundaryLessPrecise) {
         this.boundaryChar += `:${coordPair.lat},${coordPair.long}`;
     }
     this.boundaryChar = this.boundaryChar.slice(1);
 }
 
-module.exports = ProcessBoundary;
+module.exports = CalcsEngine;
 
 
 
