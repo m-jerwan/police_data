@@ -4,17 +4,16 @@ body {
   font-family: "Roboto", sans-serif;
   font-size: 0.8rem;
   font-weight: bold;
-}
-body .container {
-  padding: 10rem;
-}
-body .row {
-  margin-top: calc(((3rem * 0.288) * -1 + 0.25rem));
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-}
+  flex-direction: column; }
+  body .container {
+    padding: 10rem; }
+  body .row {
+    margin-top: calc(((3rem * 0.288) * -1 + 0.25rem));
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center; }
 
 .hexagon {
   position: relative;
@@ -27,28 +26,23 @@ body .row {
   align-items: center;
   justify-content: center;
   transform: scale(1);
-  transition: all 0.25s ease-in-out;
-}
-.hexagon:hover {
-  transform: scale(0.75);
-}
-.hexagon:before, .hexagon:after {
-  content: "";
-  position: absolute;
-  width: 0;
-  left: 0;
-  border-left: 1.5rem solid transparent;
-  border-right: 1.5rem solid transparent;
-}
-.hexagon:before {
-  bottom: 100%;
-  border-bottom: 0.864rem solid cyan;
-}
-.hexagon:after {
-  top: 100%;
-  width: 0;
-  border-top: 0.864rem solid cyan;
-}
+  transition: all 0.25s ease-in-out; }
+  .hexagon:hover {
+    transform: scale(0.75); }
+  .hexagon:before, .hexagon:after {
+    content: "";
+    position: absolute;
+    width: 0;
+    left: 0;
+    border-left: 1.5rem solid transparent;
+    border-right: 1.5rem solid transparent; }
+  .hexagon:before {
+    bottom: 100%;
+    border-bottom: 0.864rem solid cyan; }
+  .hexagon:after {
+    top: 100%;
+    width: 0;
+    border-top: 0.864rem solid cyan; }
 
 .land {
   position: relative;
@@ -61,27 +55,28 @@ body .row {
   align-items: center;
   justify-content: center;
   transform: scale(1);
-  transition: all 0.25s ease-in-out;
-}
-.land:hover {
-  transform: scale(0.75);
-}
-.land:before, .land:after {
-  content: "";
-  position: absolute;
-  width: 0;
-  left: 0;
-  border-left: 1.5rem solid transparent;
-  border-right: 1.5rem solid transparent;
-}
-.land:before {
-  bottom: 100%;
-  border-bottom: 0.864rem solid lightgreen;
-}
-.land:after {
-  top: 100%;
-  width: 0;
-  border-top: 0.864rem solid lightgreen;
-}
+  transition: all 0.25s ease-in-out; }
+  .land:hover {
+    transform: scale(0.75); }
+  .land:before, .land:after {
+    content: "";
+    position: absolute;
+    width: 0;
+    left: 0;
+    border-left: 1.5rem solid transparent;
+    border-right: 1.5rem solid transparent; }
+  .land:before {
+    bottom: 100%;
+    border-bottom: 0.864rem solid lightgreen; }
+  .land:after {
+    top: 100%;
+    width: 0;
+    border-top: 0.864rem solid lightgreen; }
 
-/*# sourceMappingURL=style.css.map */
+.force {
+  cursor: pointer; }
+
+#select-neighborhood {
+  display: flex;
+  justify-content: center;
+  padding: 2rem; }

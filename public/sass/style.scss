@@ -45,6 +45,11 @@ body {
   font-family: "Roboto", sans-serif;
   font-size: 0.8rem;
   font-weight: bold;
+  
+  // flex:
+  display: flex;
+  flex-direction: column;
+
   .container {
     padding: 10rem;
   }
@@ -63,4 +68,16 @@ body {
 
 .land {
   @include hexagon($size, $gutter, lightgreen);
+}
+
+.force {
+  cursor: pointer;
+}
+
+
+
+#select-neighborhood {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
 }
