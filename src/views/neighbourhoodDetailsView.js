@@ -82,7 +82,8 @@ NeighbourhoodDetailsView.prototype.getHoodCrimes = function(){
     const requestHelper = new RequestHelper(url);
     requestHelper.get((data)=>{
         this.crimes = data;
-        console.log(this.crimes);
+        // console.log(this.crimes);
+        PubSub.publish('neighbourhoodDetailsView:all-crimes-raw', this.crimes );
     });
 }
 

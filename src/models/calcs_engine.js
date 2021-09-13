@@ -5,12 +5,18 @@ const CalcsEngine = function() {
     this.boundaryLessCoordiantes = [];
     this.boundaryLessPrecise = [];
     this.boundaryChar = '';
+    this.crimesRaw = [];
+    this.statistics = {};
 }
 
 CalcsEngine.prototype.bindEvents = function() {
     PubSub.subscribe('neighbourhoodDetailsView:boundary-raw', (evt) =>{
         this.boundaryRaw = evt.detail;
         this.limitBoundary(this.boundaryRaw);
+    });
+    PubSub.subscribe('neighbourhoodDetailsView:all-crimes-raw', (evt)=>{
+        this.crimesRaw = evt.detail;
+        this.calcStatistics();
     })
 }
 
@@ -52,6 +58,16 @@ CalcsEngine.prototype.changeToChar = function() {
     }
     this.boundaryChar = this.boundaryChar.slice(1);
 }
+
+
+CalcsEngine.prototype.calcStatistics = function(){
+    this.crimesRaw.forEach(elm => {
+        console.log(this.statistics);
+        this.statistics[elm.category] = this.statistics[elm.category]+1||0;
+    });
+    PubSub.publish('calcsEngine:calcStatistics-ready', this.statistics);
+}
+
 
 module.exports = CalcsEngine;
 
