@@ -6,7 +6,11 @@ const CalcsEngine = function() {
     this.boundaryLessPrecise = [];
     this.boundaryChar = '';
     this.crimesRaw = [];
-    this.statistics = {};
+    this.statistics = {
+        "details" : {},
+        "crimesArray" : [],
+        "crimesNumbersArray" : []
+    };
 }
 
 CalcsEngine.prototype.bindEvents = function() {
@@ -62,9 +66,16 @@ CalcsEngine.prototype.changeToChar = function() {
 
 CalcsEngine.prototype.calcStatistics = function(){
     this.crimesRaw.forEach(elm => {
-        console.log(this.statistics);
-        this.statistics[elm.category] = this.statistics[elm.category]+1||0;
+        //crimes counter 
+        this.statistics.details[elm.category] = this.statistics.details[elm.category]+1||0;
     });
+
+    //gather all crimes names and names in an array
+    for (const detail in this.statistics.details) {
+        this.statistics.crimesArray.push(detail);
+        this.statistics.crimesNumbersArray.push(this.statistics.details[detail]);
+      }
+    console.log(this.statistics);
     PubSub.publish('calcsEngine:calcStatistics-ready', this.statistics);
 }
 
